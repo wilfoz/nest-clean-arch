@@ -23,7 +23,7 @@ export abstract class RepositoryInMemory<E extends Entity>
   async update(entity: E): Promise<void> {
     const result = await this._get(entity.id);
     const index = this.items.findIndex(item => item.id === result.id);
-    this.items[index] = result;
+    this.items[index] = entity;
   }
   async delete(id: string): Promise<void> {
     await this._get(id);
