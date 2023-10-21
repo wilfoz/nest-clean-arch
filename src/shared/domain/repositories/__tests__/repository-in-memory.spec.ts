@@ -1,6 +1,6 @@
 import { Entity } from '../../entities/entity';
 import { NotFoundError } from '../../errors/not-found-error';
-import { RepositoryInMemory } from '../repository-in-memory';
+import { InMemoryRepository } from '../in-memory-repository';
 
 type StubEntityProps = {
   name: string;
@@ -8,7 +8,7 @@ type StubEntityProps = {
 };
 
 class StubEntity extends Entity<StubEntityProps> { }
-class StubInMemoryRepository extends RepositoryInMemory<StubEntity> { }
+class StubInMemoryRepository extends InMemoryRepository<StubEntity> { }
 
 describe('InMemoryRepository Unit Tests', () => {
   let sut: StubInMemoryRepository;
