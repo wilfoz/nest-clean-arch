@@ -23,7 +23,7 @@ export class UserInMemoryRepository
   async emailExists(email: string): Promise<void> {
     const entity = this.items.find(item => item.email === email);
     if (entity) {
-      throw new ConflictError(`Email Address already used - ${email}`);
+      throw new ConflictError('Email Address already used');
     }
   }
 
