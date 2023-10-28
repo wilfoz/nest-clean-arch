@@ -80,7 +80,7 @@ describe('UserInMemoryRepository Unit Tests', () => {
       ),
     ];
     const itemsSorted = await sut['applySort'](items, null, null);
-    expect(itemsSorted).toStrictEqual([items[2], items[1], items[0]]);
+    expect(itemsSorted).toStrictEqual([items[0], items[1], items[2]]);
   });
 
   it('should sort by name', async () => {
