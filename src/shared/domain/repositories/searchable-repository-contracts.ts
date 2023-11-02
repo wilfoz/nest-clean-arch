@@ -1,5 +1,5 @@
 import { Entity } from '../entities/entity';
-import { InMemoryRepository } from './in-memory-repository';
+import { RepositoryInterface } from './repository-contracts';
 
 export type SortDirection = 'asc' | 'desc';
 
@@ -139,7 +139,7 @@ export interface SearchableRepositoryInterface<
   Filter = string,
   SearchInput = SearchParams<Filter>,
   SearchOutput = SearchResult<Entity, Filter>,
-> extends InMemoryRepository<E> {
+> extends RepositoryInterface<E> {
   sortableFields: string[];
   search(props: SearchInput): Promise<SearchOutput>;
 }

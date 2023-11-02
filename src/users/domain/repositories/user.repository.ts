@@ -1,4 +1,3 @@
-import { extname } from 'path';
 import { UserEntity } from '../entities/user.entity';
 import {
   SearchParams as DefaultSearchParams,

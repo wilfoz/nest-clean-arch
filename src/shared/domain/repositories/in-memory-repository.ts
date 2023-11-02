@@ -1,4 +1,3 @@
-import { en } from '@faker-js/faker';
 import { Entity } from '../entities/entity';
 import { NotFoundError } from '../errors/not-found-error';
 import { RepositoryInterface } from './repository-contracts';
