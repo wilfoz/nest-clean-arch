@@ -1,5 +1,16 @@
 GET http://localhost:3000/users
 ###
+
+POST  http://localhost:3000/users/login
+content-type: application/json
+
+{
+    "email": "d@d.com",
+    "password": "12345"
+}
+
+###
+
 POST http://localhost:3000/users
 content-type: application/json
 

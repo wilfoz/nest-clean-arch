@@ -3,7 +3,6 @@ import { UserOutput } from '@/users/application/dto/user-output';
 import { SignupUseCase } from '@/users/application/usecases/signup.usecase';
 import { SignInDto } from '../../dto/signin.dto';
 import { SignupDto } from '../../dto/signup.dto';
-import { SignInUseCase } from '@/users/application/usecases/signin.usecase';
 import { UpdateUserUseCase } from '@/users/application/usecases/updateuser.usecase';
 import { UpdateUserDto } from '../../dto/update-user.dto';
 import { UpdatePasswordUseCase } from '@/users/application/usecases/updatepassword.usecase';
@@ -52,19 +51,23 @@ describe('UsersController Unit Tests', () => {
     expect(presenter).toStrictEqual(new UserPresenter(output));
     expect(mockSignupUseCase.execute).toHaveBeenCalledWith(input);
   });
-  it('should signIn a user', async () => {
-    const output: SignInUseCase.Output = props;
+  it('should authenticate a user', async () => {
+    const output = 'fake_token';
     const mockSignInUseCase = {
       execute: jest.fn().mockReturnValue(Promise.resolve(output)),
     };
+    const mockAuthService = {
+      generateJwt: jest.fn().mockReturnValue(Promise.resolve(output)),
+    };
+
     sut['signInUseCase'] = mockSignInUseCase as any;
+    sut['authService'] = mockAuthService as any;
     const input: SignInDto = {
       email: 'test@email.com',
       password: '1234',
     };
-    const presenter = await sut.login(input);
-    expect(presenter).toBeInstanceOf(UserPresenter);
-    expect(presenter).toStrictEqual(new UserPresenter(output));
+    const result = await sut.login(input);
+    expect(result).toEqual(output);
     expect(mockSignInUseCase.execute).toHaveBeenCalledWith(input);
   });
   it('should update a user', async () => {
