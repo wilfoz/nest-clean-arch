@@ -116,5 +116,24 @@ describe('UsersController E2E Tests', () => {
         'UserModel not found email nof@email.com',
       );
     });
+
+    it('should return error with 400 code when password is incorrect', async () => {
+      const hashPassword = await hashProvider.generateHash('TestPassword123');
+      const entity = new UserEntity({
+        ...userDataBuilder({}),
+        email: signInDto.email,
+        password: hashPassword,
+      });
+      await repository.insert(entity);
+      const res = await request(app.getHttpServer())
+        .post('/users/login')
+        .send({ email: signInDto.email, password: 'fake' })
+        .expect(400)
+        .expect({
+          statusCode: 400,
+          error: 'Bad Request',
+          message: 'Invalid credentials',
+        });
+    });
   });
 });
